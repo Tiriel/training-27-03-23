@@ -31,6 +31,10 @@ class Comment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $author = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Book $book = null;
+
     public function getId(): ?Uuid
     {
         return $this->id;
@@ -92,6 +96,18 @@ class Comment
     public function setAuthor(?string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

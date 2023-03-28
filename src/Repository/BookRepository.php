@@ -39,6 +39,27 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
+    public function findFromDate(\DateTimeImmutable $date): array
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT b FROM App\Entity\Book WHERE b.releasedAt >= :date'
+        )->setParameter('date', $date)->getResult();
+    }
+
+    public function findBookByTitleWord(string $word): array
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        return $qb->select('b')
+            ->andWhere($qb->expr()->like('b.title', $qb->expr()->literal('%'.$word.'%')))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->gte('b.releasedAt', new \DateTimeImmutable('01-01-1980')),
+                $qb->expr()->count('b.id')
+            ))
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Book[] Returns an array of Book objects
 //     */

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Hello BookController!{% endblock %}
 
 {% block body %}
 <div class="example-wrapper">
-    <h1>Contact form</h1>
+    <h1>New Book form</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary">Create book</button>
     {{ form_end(form) }}
 </div>
 {% endblock %}

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Dto\Contact;
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,8 +13,11 @@ class GetContactController extends AbstractController
 {
     public function __invoke(): Response
     {
+        $dto = new Contact();
+        $form = $this->createForm(ContactType::class, $dto);
+
         return $this->render('contact/contact.html.twig', [
-            'controller_name' => 'Contact',
+            'form' => $form,
         ]);
     }
 }

@@ -14,12 +14,19 @@
         {% endblock %}
     </head>
     <body>
-        {% block navbar %}
-            {{ include('_navbar.html.twig', {current: app.current_route}, with_context = false) }}
-        {% endblock %}
-        {% block body %}{% endblock %}
-        <aside>
-            {{ render_esi(controller('App\\Controller\\MovieController::decades')) }}
-        </aside>
+        <header>
+            {% block navbar %}
+                {{ include('_navbar.html.twig', {current: app.current_route}, with_context = false) }}
+            {% endblock %}
+        </header>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <main class="col-lg-8 mt-5">
+                {% block body %}{% endblock %}
+            </main>
+            <aside class="col-lg-2 mt-5">
+                {{ render_esi(controller('App\\Controller\\MovieController::decades')) }}
+            </aside>
+        </div>
     </body>
 </html>
