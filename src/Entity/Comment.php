@@ -6,6 +6,7 @@ use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -16,12 +17,15 @@ class Comment
     #[ORM\Column]
     private ?Uuid $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Assert\Email]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[Assert\Length(min: 15)]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
