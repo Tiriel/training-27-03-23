@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,6 +59,11 @@ class BookController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            //$this->denyAccessUnlessGranted('publish', $book);
+            if ($this->getUser() instanceof User) {
+                $book->setCreatedBy($this->getUser());
+            }
+
             dump($book);
             $repository->save($book, true);
 

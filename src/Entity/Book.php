@@ -45,6 +45,9 @@ class Book
     #[ORM\ManyToMany(targetEntity: BookGenre::class, inversedBy: 'books')]
     private Collection $genres;
 
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?User $createdBy = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -166,6 +169,18 @@ class Book
     public function removeGenre(BookGenre $genre): self
     {
         $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }
