@@ -17,7 +17,7 @@ class HelloController extends AbstractController
             dump($sfVersion);
         }
 
-        return $this->render('hello/index.html.twig', [
+        return $this->forward('hello/index.html.twig', [
             'controller_name' => "$name !",
         ]);
     }
