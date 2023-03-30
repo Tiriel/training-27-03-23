@@ -4,12 +4,13 @@
 
 {% block body %}
 <div class="example-wrapper">
-    {% if movie is not null %}
+    {% if movie and movie.title %}
         <h1 class="mb-5">{{ movie.title }}</h1>
 
         <img src="{{ movie.poster }}" alt="{{ movie.title }} poster image" class="float-end">
         <ul>
             <li class="mb-2">Id : {{ movie.id }}</li>
+            <li class="mb-2">Rated : {{ movie.rated }}</li>
             <li class="mb-2">Country : {{ movie.country }}</li>
             <li class="mb-2">Plot : {{ movie.plot }}</li>
             <li class="mb-2">Released At : {{ movie.releasedAt|date('d M Y') }}</li>
